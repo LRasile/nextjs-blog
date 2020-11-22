@@ -1,5 +1,3 @@
-
-import Link from 'next/link';
 import { signin, signout, useSession } from 'next-auth/client';
 import { Nav, Navbar, NavDropdown, Container, Button, Image } from 'react-bootstrap';
 

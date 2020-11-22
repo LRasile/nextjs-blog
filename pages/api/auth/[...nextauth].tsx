@@ -2,8 +2,6 @@ import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
 
 const options = {
-  //site: process.env.SITE || 'https://lrasile.vercel.app/',
-
   // Configure one or more authentication providers
   providers: [
     Providers.Google({
