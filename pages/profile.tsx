@@ -1,12 +1,14 @@
 import { useSession } from 'next-auth/client';
 import Layout from '../components/layout';
 import { Image } from 'react-bootstrap';
+import { useRouter } from 'next/router'
 
 const Profile = ({ data }: { data: string }) => {
+  const router = useRouter()
   const [session, loading] = useSession();
 
   if (loading) return <div>loading...</div>;
-  if (!session) return <div>no session</div>;
+  if (!session) return <div>{router.push('/')}</div>;
 
   return (
     <Layout>

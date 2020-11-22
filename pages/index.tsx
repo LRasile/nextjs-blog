@@ -5,6 +5,7 @@ import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
 import { GetStaticProps } from 'next'
+import { useSession } from 'next-auth/client';
 
 export default function Home({
   allPostsData
@@ -15,19 +16,21 @@ export default function Home({
     id: string
   }[]
 }) {
+  
+  const [session, loading] = useSession();
+
   return (
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <h1 className={utilStyles.headingXl}>Introduction section on a blog</h1>
+        <h1 className={utilStyles.headingXl}>Headline</h1>
         <p>
-          (This is a sample website - you’ll be building a site like this in{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
+          Sign in to see more information
         </p>
       </section>
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+      { session && <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
@@ -42,7 +45,7 @@ export default function Home({
             </li>
           ))}
         </ul>
-      </section>
+      </section>}
     </Layout>
   )
 }

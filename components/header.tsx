@@ -17,7 +17,7 @@ export default function Header({ home }: { home?: boolean }) {
         <NavDropdown.Item href="/profile">
           Profile
         </NavDropdown.Item>
-        <NavDropdown.Item href="/api/auth/signout" onClick={(e) => { e.preventDefault(); signout(); }}>
+        <NavDropdown.Item href="/api/auth/signout" onClick={(e) => { e.preventDefault(); signout({ callbackUrl: '/' }); }}>
           Sign Out
         </NavDropdown.Item>
       </NavDropdown>
