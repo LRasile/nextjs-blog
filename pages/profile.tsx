@@ -14,7 +14,6 @@ const Profile = ({ data }: { data: string }) => {
     <Layout>
       {session && (
         <>
-          <br />
           <h1>{session.user.name}</h1>
           <Image src={session.user.image} roundedCircle className="avatar" />
           <br />

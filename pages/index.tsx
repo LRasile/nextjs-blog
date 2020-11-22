@@ -25,7 +25,7 @@ export default function Home({
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <h1 className={utilStyles.headingXl}>Headline</h1>
+        <h1>Headline</h1>
         <p>
           Sign in to see more information
         </p>

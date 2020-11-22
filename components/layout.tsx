@@ -23,7 +23,7 @@ export default function Layout({ children, home }: { children: React.ReactNode, 
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <Header home={home}></Header>
-      <main className='container' style={{ paddingTop: '60px' }}>
+      <main className='container' style={{ paddingTop: '80px' }}>
         {children}
         {!home && (
           <Link href="/">
