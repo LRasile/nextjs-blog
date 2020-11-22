@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Date from '../../components/date'
 import utilStyles from '../../styles/utils.module.css'
 import { GetStaticProps, GetStaticPaths } from 'next'
+import { useSession } from 'next-auth/client';
 
 export default function Post({
   postData
@@ -14,6 +15,12 @@ export default function Post({
     contentHtml: string
   }
 }) {
+
+  const [session, loading] = useSession();
+    
+  if (loading) return <div>loading...</div>;
+  if (!session) return <div>no session</div>;
+
   return (
     <Layout>
       <Head>
