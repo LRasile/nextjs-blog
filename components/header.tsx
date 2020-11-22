@@ -1,6 +1,5 @@
 
 import Link from 'next/link';
-import styles from './header.module.css'
 import { signin, signout, useSession } from 'next-auth/client';
 
 const name = 'Leonardo Rasile'
