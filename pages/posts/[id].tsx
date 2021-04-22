@@ -1,28 +1,21 @@
-import Layout from '../../components/layout'
-import { getAllPostIds, getPostData } from '../../lib/posts'
+import React, { ReactElement } from 'react'
 import Head from 'next/head'
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { getAllPostIds, getPostData } from '../../lib/posts'
 import Date from '../../components/date'
 import utilStyles from '../../styles/utils.module.css'
-import { GetStaticProps, GetStaticPaths } from 'next'
-import { useSession } from 'next-auth/client';
 
-export default function Post({
-  postData
-}: {
+export interface PostProps {
   postData: {
     title: string
     date: string
     contentHtml: string
   }
-}) {
+}
 
-  const [session, loading] = useSession();
-    
-  if (loading) return <div>loading...</div>;
-  if (!session) return <div>no session</div>;
-
+export default function Post({ postData }: PostProps): ReactElement {
   return (
-    <Layout>
+    <>
       <Head>
         <title>{postData.title}</title>
       </Head>
@@ -31,9 +24,10 @@ export default function Post({
         <div className={utilStyles.lightText}>
           <Date dateString={postData.date} />
         </div>
+        {/* eslint-disable-next-line react/no-danger */}
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
-    </Layout>
+    </>
   )
 }
 

@@ -1,36 +1,26 @@
+import React, { ReactElement } from 'react'
 import Head from 'next/head'
-import Layout, { siteTitle } from '../components/layout'
+import Link from 'next/link'
+import { GetStaticProps } from 'next'
+import { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
-import Link from 'next/link'
 import Date from '../components/date'
-import { GetStaticProps } from 'next'
-import { useSession } from 'next-auth/client';
 
-export default function Home({
-  allPostsData
-}: {
-  allPostsData: {
-    date: string
-    title: string
-    id: string
-  }[]
-}) {
-  
-  const [session, loading] = useSession();
+export interface HomeProps {
+  allPostsData: { date: string; title: string; id: string }[]
+}
 
+export default function Home({ allPostsData }: HomeProps): ReactElement {
   return (
-    <Layout home>
+    <>
       <Head>
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
         <h1>Headline</h1>
-        <p>
-          Sign in to see more information
-        </p>
       </section>
-      { session && <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
@@ -45,8 +35,8 @@ export default function Home({
             </li>
           ))}
         </ul>
-      </section>}
-    </Layout>
+      </section>
+    </>
   )
 }
 

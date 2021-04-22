@@ -1,38 +1,18 @@
-import { useSession } from 'next-auth/client';
-import Layout from '../components/layout';
-import { Image } from 'react-bootstrap';
-import { useRouter } from 'next/router'
+import React, { ReactElement } from 'react'
 
-const Profile = ({ data }: { data: string }) => {
-  const router = useRouter()
-  const [session, loading] = useSession();
+export interface ProfileProps {
+  data: string
+}
 
-  if (loading) return <div>loading...</div>;
-  if (!session) return <div>{router.push('/')}</div>;
-
+export default function Profile({ data }: ProfileProps): ReactElement {
   return (
-    <Layout>
-      {session && (
-        <>
-          <h1>{session.user.name}</h1>
-          <Image src={session.user.image} roundedCircle className="avatar" />
-          <br />
-          <br />
-          <p>Build: {data}</p>
-        </>
-      )}
+    <>
+      <p>Build: {data}</p>
+    </>
+  )
+}
 
-      <style jsx>{`
-        .avatar {
-          width: 220px;
-          border-radius: 10px;
-        }
-      `}</style>
-    </Layout>
-  );
-};
-
-export async function getStaticProps() {
+export async function getStaticProps(): Promise<{ props: ProfileProps }> {
   // Get external data from the file system, API, DB, etc.
   const data = new Date().toString()
 
@@ -40,5 +20,3 @@ export async function getStaticProps() {
   //  passed to the `Home` component
   return { props: { data } }
 }
-
-export default Profile;

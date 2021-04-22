@@ -1,10 +1,16 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import React, { ReactElement } from 'react'
 import Header from './header'
 
 export const siteTitle = 'Next.js Sample Website'
 
-export default function Layout({ children, home }: { children: React.ReactNode, home?: boolean }) {
+export interface LayoutProps {
+  children: React.ReactNode
+  home?: boolean
+}
+
+export default function Layout({ children, home }: LayoutProps): ReactElement {
   return (
     <div>
       <Head>
@@ -22,12 +28,12 @@ export default function Layout({ children, home }: { children: React.ReactNode, 
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <Header home={home}></Header>
-      <main className='container' style={{ paddingTop: '80px' }}>
+      <Header />
+      <main className="container" style={{ paddingTop: '80px' }}>
         {children}
         {!home && (
           <Link href="/">
-            <a className='btn btn-outline-primary'>← Back to home</a>
+            <a className="btn btn-outline-primary">← Back to home</a>
           </Link>
         )}
       </main>
